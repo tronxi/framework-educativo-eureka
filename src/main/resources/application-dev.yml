@@ -6,5 +6,4 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
   server:
-    enableSelfPreservation: false
     waitTimeInMsWhenSyncEmpty: 0
