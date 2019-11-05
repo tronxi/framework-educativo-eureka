@@ -5,6 +5,8 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
-  #server:
+  server:
+    eviction-interval-timer-in-ms: 1000
+
     #enableSelfPreservation: false
     #waitTimeInMsWhenSyncEmpty: 0
