@@ -9,7 +9,6 @@ COPY --from="git" /repo/framework-educativo-eureka .
 RUN mvn package spring-boot:repackage
 
 FROM openjdk:8-alpine
-ARG profile
-ENV profile_env ${profile}
+ENV profile dev
 COPY --from="builder" /target/framework-educativo-0.0.1-SNAPSHOT.jar .
 CMD java -jar -Dspring.profiles.active=${profile} framework-educativo-0.0.1-SNAPSHOT.jar
