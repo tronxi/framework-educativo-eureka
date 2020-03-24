@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: framework-educativo-eureka
+  labels:
+    app: framework-educativo-eureka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: framework-educativo-eureka
+  template:
+    metadata:
+      labels:
+        app: framework-educativo-eureka
+    spec:
+      containers:
+        - name: framework-educativo-eureka
+          image: tronxi/framework-educativo-eureka:${EUREKA_TAG}
+          resources:
+            limits:
+              cpu: "0.3"
+              memory: "400Mi"
+            requests:
+              cpu: "0.2"
+              memory: "200Mi"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8761
+            initialDelaySeconds: 90
+            periodSeconds: 30
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8761
+            initialDelaySeconds: 90
+            periodSeconds: 30
+          env:
+            - name: profile
+              valueFrom:
+                configMapKeyRef:
+                  name: framework-educativo-config-map
+                  key: profile
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: framework-educativo-eureka-service
+  labels:
+    app: framework-educativo-eureka
+spec:
+  type: LoadBalancer
+  selector:
+    app: framework-educativo-eureka
+  ports:
+    - protocol: TCP
+      port: 8761
+      targetPort: 8761
