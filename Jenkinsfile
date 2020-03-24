@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh '''
                     docker login  --username tronxi --password $DOCKER_HUB_PASSWORD
-                    docker push tronxi/framework-educativo-EUREKA:${EUREKA_TAG}
+                    docker push tronxi/framework-educativo-eureka:${EUREKA_TAG}
                 '''
             }
         }
