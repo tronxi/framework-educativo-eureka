@@ -19,11 +19,11 @@ spec:
           image: tronxi/framework-educativo-eureka:${EUREKA_TAG}
           resources:
             limits:
-              cpu: "0.3"
-              memory: "400Mi"
+              cpu: "0.9"
+              memory: "800Mi"
             requests:
-              cpu: "0.2"
-              memory: "200Mi"
+              cpu: "0.7"
+              memory: "700Mi"
           livenessProbe:
             httpGet:
               path: /actuator/health
